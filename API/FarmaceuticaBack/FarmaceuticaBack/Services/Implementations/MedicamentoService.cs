@@ -27,7 +27,7 @@ namespace FarmaceuticaBack.Services.Implementations
             return await _repository.GetAll();
         }
 
-        public async Task<List<Medicamento>> GetByFiltro(MedicamentoFiltro oFiltro)
+        public async Task<List<MedicamentoDTO>> GetByFiltro(MedicamentoFiltro oFiltro)
         {
             return await _repository.GetByFiltro(oFiltro);
         }

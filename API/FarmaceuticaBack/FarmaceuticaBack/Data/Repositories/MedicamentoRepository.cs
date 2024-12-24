@@ -54,7 +54,7 @@ namespace FarmaceuticaBack.Data.Repositories
             return List;
         }
 
-        public async Task<List<Medicamento>> GetByFiltro(MedicamentoFiltro oFiltro)
+        public async Task<List<MedicamentoDTO>> GetByFiltro(MedicamentoFiltro oFiltro)
         {
             IQueryable<Medicamento> query = _context.Medicamentos.AsQueryable();
 
@@ -89,6 +89,19 @@ namespace FarmaceuticaBack.Data.Repositories
                               .Include(m => m.IdMarcaNavigation)
                               .Include(m => m.IdMonodrogaNavigation)
                               .Include(m => m.IdPresentacionNavigation)
+                              .Select(m => new MedicamentoDTO
+                               {
+                               IdMedicamento = m.IdMedicamento,
+                               NombreMedicamento = m.NombreComercial,
+                               Laboratorio = m.IdLaboratorioNavigation.NombreLaboratorio,
+                               Marca = m.IdMarcaNavigation.NombreMarca,
+                               Presentacion = m.IdPresentacionNavigation.NombrePresentacion,
+                               Monodroga = m.IdMonodrogaNavigation.Monodroga1,
+                               Descripcion = m.Descripcion,
+                               VentaLibre = m.VentaLibre,
+                               Activo = m.Activo,
+                               Precio = m.Precio
+                               })
                               .ToListAsync();
         }
 

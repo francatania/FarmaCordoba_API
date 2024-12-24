@@ -15,6 +15,7 @@ namespace FarmaceuticaWebApi.Controllers
         {
             _service = service;
         }
+        [Authorize]
         [HttpGet("Filter")]
         public async Task<IActionResult> GetByFilter([FromQuery] MedicamentoFiltro filtro)
         {

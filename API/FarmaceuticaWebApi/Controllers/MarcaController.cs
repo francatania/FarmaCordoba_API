@@ -1,4 +1,5 @@
 ﻿using FarmaceuticaBack.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarmaceuticaWebApi.Controllers
@@ -13,7 +14,7 @@ namespace FarmaceuticaWebApi.Controllers
         {
             _marcaService = marcaService;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetMarcas()
         {
