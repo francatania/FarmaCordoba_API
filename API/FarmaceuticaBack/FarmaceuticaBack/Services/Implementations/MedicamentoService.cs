@@ -37,7 +37,7 @@ namespace FarmaceuticaBack.Services.Implementations
             return await (_repository.GetLastId());
         }
 
-        public async Task<Medicamento> GetMedicamentoById(int id)
+        public async Task<MedicamentoDTO> GetMedicamentoById(int id)
         {
             return await _repository.GetMedicamentoById(id);
         }

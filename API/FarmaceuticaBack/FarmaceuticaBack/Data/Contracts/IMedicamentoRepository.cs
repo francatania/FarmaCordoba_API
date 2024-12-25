@@ -11,7 +11,7 @@ namespace FarmaceuticaBack.Data.Contracts
     public interface IMedicamentoRepository
     {
         Task<List<MedicamentoDTO>> GetAll();
-        Task<Medicamento> GetMedicamentoById(int id);
+        Task<MedicamentoDTO> GetMedicamentoById(int id);
         Task<List<MedicamentoDTO>> GetByFiltro(MedicamentoFiltro oFiltro);
         Task<bool> Save(Medicamento oMedicamento);
         Task<bool> Delete(int? id);
