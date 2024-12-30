@@ -51,6 +51,32 @@ namespace FarmaceuticaWebApi.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet("GetForSave/id")]
+
+        public async Task<IActionResult> GetMedicamentoSaveDTOById([FromQuery] int id)
+        {
+            try
+            {
+                var med = await _service.GetMedicamentoSaveDTOById(id);
+                if (med != null)
+                {
+                    return Ok(med);
+                }
+                else
+                {
+                    return NotFound("No se encontró el medicamento.");
+                }
+
+            }
+            catch (Exception exc)
+            {
+
+                return StatusCode(500, "Error" + exc); ;
+            }
+
+        }
+
 
         [HttpGet("LastId")]
 

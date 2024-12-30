@@ -139,6 +139,26 @@ namespace FarmaceuticaBack.Data.Repositories
                                  .FirstOrDefaultAsync();
         }
 
+        public async Task<MedicamentoSaveDTO> GetMedicamentoSaveDTOById(int id)
+        {
+            return await _context.Medicamentos
+                               .Select(m => new MedicamentoSaveDTO
+                               {
+                                   IdMedicamento = m.IdMedicamento,
+                                   NombreMedicamento = m.NombreComercial,
+                                   IdLaboratorio = m.IdLaboratorio,
+                                   IdMarca = m.IdMarca,
+                                   IdPresentacion = m.IdPresentacion,
+                                   IdMonodroga = m.IdMonodroga,
+                                   Descripcion = m.Descripcion,
+                                   VentaLibre = m.VentaLibre,
+                                   Activo = m.Activo,
+                                   Precio = m.Precio
+                               })
+                                .Where(m => m.IdMedicamento == id)
+                                 .FirstOrDefaultAsync();
+        }
+
         public async Task<bool> Save(Medicamento oMedicamento)
         {
             _context.Medicamentos.Add(oMedicamento);

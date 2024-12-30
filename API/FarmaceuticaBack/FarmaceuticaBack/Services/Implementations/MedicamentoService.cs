@@ -42,6 +42,12 @@ namespace FarmaceuticaBack.Services.Implementations
             return await _repository.GetMedicamentoById(id);
         }
 
+        public async Task<MedicamentoSaveDTO> GetMedicamentoSaveDTOById(int id)
+        {
+            return await _repository.GetMedicamentoSaveDTOById(id);
+        }
+
+
         public async Task<bool> Save(Medicamento oMedicamento)
         {
             return await _repository.Save(oMedicamento);
