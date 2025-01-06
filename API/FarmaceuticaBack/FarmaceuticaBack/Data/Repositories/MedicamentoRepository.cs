@@ -159,19 +159,28 @@ namespace FarmaceuticaBack.Data.Repositories
                                  .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> Save(Medicamento oMedicamento)
+        public async Task<bool> Save(MedicamentoSaveDTO oMedicamento)
         {
-            _context.Medicamentos.Add(oMedicamento);
+            Medicamento oMed = new Medicamento();
+            oMed.IdMonodroga = oMedicamento.IdMonodroga;
+            oMed.NombreComercial = oMedicamento.NombreMedicamento;
+            oMed.IdLaboratorio = oMedicamento.IdLaboratorio;
+            oMed.VentaLibre = oMedicamento.VentaLibre;
+            oMed.IdPresentacion = oMedicamento.IdPresentacion;
+            oMed.Descripcion = oMedicamento.Descripcion;
+            oMed.Precio = oMedicamento.Precio;
+            oMed.Activo = oMedicamento.Activo;
+            _context.Medicamentos.Add(oMed);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Update(Medicamento oMedicamento)
+        public async Task<bool> Update(MedicamentoSaveDTO oMedicamento)
         {
             var bMedicamento = await _context.Medicamentos.FindAsync(oMedicamento.IdMedicamento);
             if (bMedicamento != null)
             {
                 bMedicamento.IdMonodroga = oMedicamento.IdMonodroga;
-                bMedicamento.NombreComercial = oMedicamento.NombreComercial;
+                bMedicamento.NombreComercial = oMedicamento.NombreMedicamento;
                 bMedicamento.IdLaboratorio = oMedicamento.IdLaboratorio;
                 bMedicamento.IdMarca = oMedicamento.IdMarca;
                 bMedicamento.VentaLibre = oMedicamento.VentaLibre;

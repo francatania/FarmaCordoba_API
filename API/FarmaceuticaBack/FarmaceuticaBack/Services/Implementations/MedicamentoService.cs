@@ -48,12 +48,12 @@ namespace FarmaceuticaBack.Services.Implementations
         }
 
 
-        public async Task<bool> Save(Medicamento oMedicamento)
+        public async Task<bool> Save(MedicamentoSaveDTO oMedicamento)
         {
             return await _repository.Save(oMedicamento);
         }
 
-        public async Task<bool> Update(Medicamento oMedicamento)
+        public async Task<bool> Update(MedicamentoSaveDTO oMedicamento)
         {
             return await _repository.Update(oMedicamento);
         }

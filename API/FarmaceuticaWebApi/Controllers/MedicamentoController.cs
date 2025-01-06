@@ -122,7 +122,7 @@ namespace FarmaceuticaWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveMedicamento([FromBody] Medicamento oMedicamento)
+        public async Task<IActionResult> SaveMedicamento([FromBody] MedicamentoSaveDTO oMedicamento)
         {
             var result = IsValid(oMedicamento);
             if (result == null)
@@ -136,7 +136,7 @@ namespace FarmaceuticaWebApi.Controllers
         }
         
         [HttpPut]
-        public async Task<IActionResult> PutMedicamento([FromBody] Medicamento oMedicamento)
+        public async Task<IActionResult> PutMedicamento([FromBody] MedicamentoSaveDTO oMedicamento)
         {
             try
             {
@@ -153,12 +153,12 @@ namespace FarmaceuticaWebApi.Controllers
                 return StatusCode(500, "Hubo Un Problema En El Servidor" + ex);
             }
         }
-        private string? IsValid(Medicamento oMedicamento)
+        private string? IsValid(MedicamentoSaveDTO oMedicamento)
         {
             string? result = null;
             if (oMedicamento.IdMedicamento == 0 || oMedicamento.IdMonodroga == 0 || oMedicamento.IdLaboratorio == 0 || oMedicamento.IdMarca == 0 || oMedicamento.IdPresentacion == 0)
                 result = "El Campo Debe Ser Mayor a 0";
-            if (oMedicamento.NombreComercial.Length > 100 || string.IsNullOrEmpty(oMedicamento.NombreComercial))
+            if (oMedicamento.NombreMedicamento.Length > 100 || string.IsNullOrEmpty(oMedicamento.NombreMedicamento))
                 result = "La Cantidad De Caracrteres Que Debe Tener Debe Ser Entre 1 y 100";
             if (oMedicamento.VentaLibre == null)
                 result = "No Se Aceptan Valores Nulos En Este Campo";

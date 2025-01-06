@@ -14,9 +14,9 @@ namespace FarmaceuticaBack.Data.Contracts
         Task<MedicamentoDTO> GetMedicamentoById(int id);
         Task<MedicamentoSaveDTO> GetMedicamentoSaveDTOById(int id);
         Task<List<MedicamentoDTO>> GetByFiltro(MedicamentoFiltro oFiltro);
-        Task<bool> Save(Medicamento oMedicamento);
+        Task<bool> Save(MedicamentoSaveDTO oMedicamento);
         Task<bool> Delete(int? id);
-        Task<bool> Update(Medicamento oMedicamento);
+        Task<bool> Update(MedicamentoSaveDTO oMedicamento);
 
         Task<int> GetLastId();
 
