@@ -161,10 +161,17 @@ namespace FarmaceuticaBack.Data.Repositories
 
         public async Task<bool> Save(MedicamentoSaveDTO oMedicamento)
         {
+            var newId = await _context.Medicamentos
+                .OrderByDescending(m => m.IdMedicamento)
+                .Select(m => m.IdMedicamento + 1)
+                .FirstOrDefaultAsync();
+
             Medicamento oMed = new Medicamento();
+            oMed.IdMedicamento = newId;
             oMed.IdMonodroga = oMedicamento.IdMonodroga;
             oMed.NombreComercial = oMedicamento.NombreMedicamento;
             oMed.IdLaboratorio = oMedicamento.IdLaboratorio;
+            oMed.IdMarca = oMedicamento.IdMarca;
             oMed.VentaLibre = oMedicamento.VentaLibre;
             oMed.IdPresentacion = oMedicamento.IdPresentacion;
             oMed.Descripcion = oMedicamento.Descripcion;

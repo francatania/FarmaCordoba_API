@@ -129,7 +129,7 @@ namespace FarmaceuticaWebApi.Controllers
             {
                 var response = await _service.Save(oMedicamento);
                 if (response)
-                    return Ok("Medicamento Registrado Con Exito");
+                    return Ok(new { success = true, message = "Medicamento registrado." });
                 return StatusCode(500, "Error en el servidor");
             }
             return BadRequest(IsValid(oMedicamento));
@@ -144,28 +144,28 @@ namespace FarmaceuticaWebApi.Controllers
                 if (result == null)
                 {
                     var obj = await _service.Update(oMedicamento);
-                    return Ok("Se Ejecutaron Los Cambios Con Exito...");
+                    return Ok(new { success = true, message = "Medicamento editado." });
                 }
-                return BadRequest(IsValid(oMedicamento));
+                return BadRequest( new { success = false,message = result });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Hubo Un Problema En El Servidor" + ex);
+                return StatusCode(500, "Hubo un problema en el servidor." + ex);
             }
         }
         private string? IsValid(MedicamentoSaveDTO oMedicamento)
         {
             string? result = null;
             if (oMedicamento.IdMedicamento == 0 || oMedicamento.IdMonodroga == 0 || oMedicamento.IdLaboratorio == 0 || oMedicamento.IdMarca == 0 || oMedicamento.IdPresentacion == 0)
-                result = "El Campo Debe Ser Mayor a 0";
+                result = "El campo debe ser mayor a 0";
             if (oMedicamento.NombreMedicamento.Length > 100 || string.IsNullOrEmpty(oMedicamento.NombreMedicamento))
-                result = "La Cantidad De Caracrteres Que Debe Tener Debe Ser Entre 1 y 100";
+                result = "La cantidad de caracrteres que debe tener debe ser entre 1 y 100";
             if (oMedicamento.VentaLibre == null)
-                result = "No Se Aceptan Valores Nulos En Este Campo";
+                result = "No se aceptan valores nulose en este campo";
             if (oMedicamento.Descripcion.Length > 255 || string.IsNullOrEmpty(oMedicamento.Descripcion))
-                result = "La Lomgitud Del Campo Debe Tener De 1 a 255 Caracteres";
+                result = "La lomgitud del campo debe tener de 1 a 255 caracteres";
             if (oMedicamento.Precio == null)
-                result = "Debe Ingresar Un Precio...";
+                result = "Debe ingresar un precio";
 
 
             return result;
