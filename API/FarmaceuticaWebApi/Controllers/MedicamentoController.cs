@@ -25,7 +25,7 @@ namespace FarmaceuticaWebApi.Controllers
             
 
         }
-
+        [Authorize]
         [HttpGet("Id")]
 
         public async Task<IActionResult> GetMedicamentoById([FromQuery] int id)
@@ -103,6 +103,7 @@ namespace FarmaceuticaWebApi.Controllers
                 return StatusCode(500, "Error en el servidor" + ex);
             }
         }
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteMedicamentos([FromQuery] int? id)
         {
@@ -111,7 +112,7 @@ namespace FarmaceuticaWebApi.Controllers
                 if (id != 0 && id != null)
                 {
                     var baja = await _service.Delete(id);
-                    return Ok("Se dio la baja con exito");
+                    return Ok(new { success = true, message = "Medicamento desactivado." });
                 }
                 return StatusCode(500, "Debe ingresar un codigo o Uno de valor distinto a 0");
             }
@@ -121,6 +122,7 @@ namespace FarmaceuticaWebApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> SaveMedicamento([FromBody] MedicamentoSaveDTO oMedicamento)
         {
@@ -134,7 +136,8 @@ namespace FarmaceuticaWebApi.Controllers
             }
             return BadRequest(IsValid(oMedicamento));
         }
-        
+
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> PutMedicamento([FromBody] MedicamentoSaveDTO oMedicamento)
         {
